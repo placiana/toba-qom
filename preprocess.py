@@ -1,3 +1,4 @@
+import json
 import os
 import re
 from bs4 import BeautifulSoup
@@ -77,6 +78,21 @@ def preprocess_data(data_dir):
         json.dump(data, file, ensure_ascii=False, indent=4)
                 
 
+
+
+def get_pandas_from_json(json_file):
+    import pandas as pd
+    with open(json_file, 'r', encoding='utf-8') as file:
+        data = json.load(file)
+    
+    for entry in data:
+        for verse in entry['verses']:
+            verse['book_label'] = entry['book_label']
+            verse['title'] = entry['title']
+            verse['headings'] = entry['headings']
+    
+    df = pd.DataFrame([verse for entry in data for verse in entry['verses']])
+    return df
 
 if __name__ == "__main__":
     data_directory = os.path.join("data", "BHTI_es")

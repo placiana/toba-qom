@@ -79,6 +79,10 @@ def scrap_site(starting_url, lang="es-ES"):
         relevant_content = soup.find('div', class_=re.compile("^ChapterContent_reader"))
 
         filename = path_to_filename(get_trailing_path(next_link))
+        # index filename with iteration number to avoid overwriting, like 0001_filename.html
+        filename = f"{iter:05d}_{filename}"
+
+
         data_filename = os.path.join(data_dir, filename)
 
         # Save the content to a file
@@ -105,4 +109,6 @@ if __name__ == "__main__":
     url = "https://www.bible.com/es-ES/bible/222/GEN.1.BHTI" # BHTI
     url = "https://www.bible.com/es-ES/bible/222/SIR.8.BHTI"
 
-    scrap_site(url, 'BHTI_es')
+    url = 'https://www.bible.com/bible/150/GEN.1.RVR95'
+
+    scrap_site(url, 'es_RVR95')
