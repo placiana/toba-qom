@@ -1,4 +1,9 @@
 # toba-qom
+1. Instalar dependencias
+
+```
+pip install -r requirements.txt
+```
 
 
 1. Descargar contenido
@@ -11,13 +16,13 @@ from retrieve import scrap_site
 scrap_site('https://www.bible.com/bible/150/GEN.1.RVR95', 'es_RVR95')
 ```
 
-2. Procesar
+1. Procesar
 
 Escribe un archivo json con los datos limpios
 
 ```
 import preprocess
-preprocess.preprocess_data('es_RVR95)
+preprocess.preprocess_data('data/es_RVR95')
 ```
 
 Crea un DataFrame de pandas a partir del json

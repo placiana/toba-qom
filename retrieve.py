@@ -48,11 +48,10 @@ def retrieve_page(url, lang="es-ES"):
     print(iter, f"Saved content from {next_link} to {data_filename}")
 
     # Find the next link
-    next_link = soup.find_all('div', class_='[pointer-events:all]')[1].find('a')['href'].strip()
-    #check if empty
-    if not next_link:
+    if not soup.find_all('div', class_='[pointer-events:all]'):
         print("No more links found. Exiting.")
         return None
+    next_link = soup.find_all('div', class_='[pointer-events:all]')[1].find('a')['href'].strip()
 
     next_link = schema + domain + next_link
     return next_link
@@ -92,12 +91,11 @@ def scrap_site(starting_url, lang="es-ES"):
         print(iter, f"Saved content from {next_link} to {data_filename}")
 
         # Find the next link
-        next_link = soup.find_all('div', class_='[pointer-events:all]')[1].find('a')['href'].strip()
-        #check if empty
-        if not next_link:
+        if not soup.find_all('div', class_='[pointer-events:all]')[1].find('a'):
             print("No more links found. Exiting.")
-            break
-
+            return
+        next_link = soup.find_all('div', class_='[pointer-events:all]')[1].find('a')['href'].strip()
+        
         next_link = schema + domain + next_link        
 
 
